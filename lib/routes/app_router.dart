@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../features/auth/presentation/screens/login_screen.dart';
 import '../features/catalogue/screens/catalogue_screen.dart';
 import '../features/catalogue/screens/content_detail_screen.dart';
+import '../features/catalogue/screens/video_player_screen.dart';
 import '../features/catalogue/data/content_model.dart';
 
 /// Point d'entree unique des routes. Ajoutez une route par ecran ici
@@ -28,8 +29,14 @@ class AppRouter {
           return ContentDetailScreen(content: content);
         },
       ), // GoRoute
+      GoRoute(
+        path: '/player/:id',
+        builder: (context, state) {
+          final content = state.extra as ContentModel;
+          return VideoPlayerScreen(content: content);
+        },
+      ), // GoRoute
       // TODO: ajouter au fur et a mesure :
-      // '/player/:id'   -> lecteur video
       // '/subscription' -> ecran d'abonnement / paiement
       // '/profile'      -> profil utilisateur + historique
     ],

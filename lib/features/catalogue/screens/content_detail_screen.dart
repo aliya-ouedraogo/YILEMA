@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../data/content_model.dart';
 
 class ContentDetailScreen extends StatelessWidget {
@@ -50,7 +51,7 @@ class ContentDetailScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        // TODO: naviguer vers le lecteur video
+                        context.push('/player/${content.id}', extra: content);
                       },
                       icon: const Icon(Icons.play_arrow),
                       label: const Text('Regarder'),
