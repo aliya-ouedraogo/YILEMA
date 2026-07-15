@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import '../providers/catalogue_provider.dart';
 
 class CatalogueScreen extends StatefulWidget {
@@ -46,19 +47,24 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
               final item = provider.contents[index];
               return Card(
                 clipBehavior: Clip.antiAlias,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: item.affiche != null
-                          ? Image.network(item.affiche!, fit: BoxFit.cover, width: double.infinity)
-                          : Container(color: Colors.grey[300]),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(item.titre, maxLines: 2, overflow: TextOverflow.ellipsis),
-                    ),
-                  ],
+                child: InkWell(
+                  onTap: () {
+                    context.push('/content/${item.id}', extra: item);
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: item.affiche != null
+                            ? Image.network(item.affiche!, fit: BoxFit.cover, width: double.infinity)
+                            : Container(color: Colors.grey[300]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(item.titre, maxLines: 2, overflow: TextOverflow.ellipsis),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
