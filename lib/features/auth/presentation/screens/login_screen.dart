@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -106,6 +107,16 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
               const SizedBox(height: 16),
               PrimaryButton(label: 'Se connecter', onPressed: _handleLogin, isLoading: auth.isLoading),
+              if (kDebugMode) ...[
+                const SizedBox(height: 12),
+                Center(
+                  child: TextButton(
+                    onPressed: () => context.read<AuthProvider>().debugSkipLogin(),
+                    child: const Text('🛠 Mode démo (sans backend)',
+                        style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                  ),
+                ),
+              ],
               const SizedBox(height: 24),
               const AuthDivider(),
               const SizedBox(height: 20),

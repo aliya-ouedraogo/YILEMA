@@ -5,6 +5,9 @@ import '../data/user_model.dart';
 
 enum AuthStatus { unknown, authenticated, unauthenticated }
 
+/// État d'authentification partagé dans toute l'app.
+/// Consulté par exemple pour savoir si un utilisateur peut accéder
+/// à un contenu premium ou doit être redirigé vers l'écran de connexion.
 class AuthProvider extends ChangeNotifier {
   final _repository = AuthRepository();
 
@@ -52,6 +55,17 @@ class AuthProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+  /// Contournement UNIQUEMENT disponible en mode debug (kDebugMode), pour
+  /// que l'équipe frontend puisse tester la navigation post-connexion
+  /// (barre de navigation, écrans protégés) tant que feature/auth-api
+  /// n'est pas prête côté backend. Ne s'exécute jamais en release.
+  Future<void> debugSkipLogin() async {
+    if (!kDebugMode) return;
+    currentUser = UserModel(id: 0, nom: 'Utilisateur Démo', email: 'demo@yilema.bf');
+    status = AuthStatus.authenticated;
+    notifyListeners();
   }
 
   Future<void> logout() async {

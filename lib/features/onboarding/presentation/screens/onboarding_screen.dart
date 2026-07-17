@@ -12,45 +12,45 @@ class _OnboardingPageData {
   final List<String> images;
 }
 
-// TODO équipe design : seul le texte de la page 1 vient de la maquette.
-// Les textes des pages 2 et 3 sont des propositions à valider avec l'équipe,
-// et les images sont des placeholders (picsum) à remplacer par les vraies
-// affiches Yilema une fois disponibles dans assets/images/.
+// TODO: remplace ces URLs par tes propres images (celles de vos maquettes,
+// ou vos vraies affiches une fois prêtes). 6 images par page, dans l'ordre
+// des colonnes de la grille (gauche-haut, milieu-haut, droite-haut,
+// gauche-bas, milieu-bas, droite-bas).
 final _pages = [
   const _OnboardingPageData(
     headline: 'LE MEILLEUR DU CINÉMA\nBURKINABÈ ET AFRICAIN,\nOÙ VOUS VOULEZ.',
     subtitle: 'Films, séries et documentaires exclusifs. Annulez à tout moment.',
     images: [
-      'https://picsum.photos/seed/yilema1/300/450',
-      'https://picsum.photos/seed/yilema2/300/450',
-      'https://picsum.photos/seed/yilema3/300/450',
-      'https://picsum.photos/seed/yilema4/300/450',
-      'https://picsum.photos/seed/yilema5/300/450',
-      'https://picsum.photos/seed/yilema6/300/450',
+      'https://i.pinimg.com/736x/2b/1b/94/2b1b94b22a5236791acdf912bbbc12f0.jpg',
+      'https://i.pinimg.com/736x/54/62/32/54623244cb072ea233f63d6d6f143a73.jpg',
+      'https://i.pinimg.com/736x/21/72/4a/21724a7a15da9e466845f60d596031bb.jpg',
+      'https://i.pinimg.com/1200x/ba/e1/51/bae15171cafd1fe54115b9af7c963cda.jpg',
+      'https://i.pinimg.com/736x/82/89/b2/8289b2f43017d24938a77fafef2551a1.jpg',
+      'https://i.pinimg.com/736x/38/91/d6/3891d64bc01c94a35b504c1f8f7c490b.jpg',
     ],
   ),
   const _OnboardingPageData(
     headline: 'DES HISTOIRES QUI\nVOUS RESSEMBLENT.',
     subtitle: 'Réalisées par des cinéastes burkinabè et africains, pour vous.',
     images: [
-      'https://picsum.photos/seed/yilema7/300/450',
-      'https://picsum.photos/seed/yilema8/300/450',
-      'https://picsum.photos/seed/yilema9/300/450',
-      'https://picsum.photos/seed/yilema10/300/450',
-      'https://picsum.photos/seed/yilema11/300/450',
-      'https://picsum.photos/seed/yilema12/300/450',
+      'https://i.pinimg.com/736x/f3/9b/60/f39b604af5778bd927c4fda30a744467.jpg',
+      'https://i.pinimg.com/736x/90/57/71/9057714a89ad57c4032ea6b1eff3591a.jpg',
+      'https://i.pinimg.com/736x/85/e1/7d/85e17d2fc4b8524430c8b3b0a55b6fef.jpg',
+      'https://i.pinimg.com/736x/3d/a2/1c/3da21c309c081c5aae9247610b76ca33.jpg',
+      'https://i.pinimg.com/736x/6c/53/6a/6c536ac6b8bde7ad9ed7696c84f093fa.jpg',
+      'https://i.pinimg.com/736x/a3/fd/95/a3fd953dc27a7d87392598c4ad428619.jpg',
     ],
   ),
   const _OnboardingPageData(
     headline: 'REGARDEZ PARTOUT,\nMÊME HORS-LIGNE.',
     subtitle: 'Téléchargez vos films préférés et emportez-les avec vous.',
     images: [
-      'https://picsum.photos/seed/yilema13/300/450',
-      'https://picsum.photos/seed/yilema14/300/450',
-      'https://picsum.photos/seed/yilema15/300/450',
-      'https://picsum.photos/seed/yilema16/300/450',
-      'https://picsum.photos/seed/yilema17/300/450',
-      'https://picsum.photos/seed/yilema18/300/450',
+      'https://i.pinimg.com/736x/fe/53/89/fe53896a0d450d4987dc89cf4c55f0c2.jpg',
+      'https://i.pinimg.com/736x/fc/66/e8/fc66e876b5f351e95ee4c867b6d8c94f.jpg',
+      'https://i.pinimg.com/736x/eb/07/17/eb07179ff8e4285d9112343d75bf17c8.jpg',
+      'https://i.pinimg.com/736x/09/52/2a/09522a0ebab73905d985819bde413ca4.jpg',
+      'https://i.pinimg.com/736x/e9/59/58/e9595836aece1d8f44895f297b7dfee2.jpg',
+      'https://i.pinimg.com/736x/03/1d/d3/031dd3906da1094fdb462e3f7c2f8c8b.jpg',
     ],
   ),
 ];
@@ -91,17 +91,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           // En-tête fixe au-dessus du carousel : logo + lien "S'identifier"
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const AppLogo(fontSize: 16, iconSize: 20),
-                  TextButton(
-                    onPressed: () => context.go('/login'),
-                    child: const Text("S'IDENTIFIER",
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
-                  ),
-                ],
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.45),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const AppLogo(fontSize: 16, iconSize: 20),
+                    TextButton(
+                      onPressed: () => context.go('/login'),
+                      child: const Text("S'IDENTIFIER",
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
