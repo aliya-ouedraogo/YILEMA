@@ -5,9 +5,6 @@ import '../data/user_model.dart';
 
 enum AuthStatus { unknown, authenticated, unauthenticated }
 
-/// État d'authentification partagé dans toute l'app.
-/// Consulté par exemple pour savoir si un utilisateur peut accéder
-/// à un contenu premium ou doit être redirigé vers l'écran de connexion.
 class AuthProvider extends ChangeNotifier {
   final _repository = AuthRepository();
 
@@ -28,6 +25,28 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       errorMessage = 'Email ou mot de passe incorrect';
       status = AuthStatus.unauthenticated;
+      return false;
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<bool> register({
+    required String nom,
+    required String email,
+    required String motDePasse,
+  }) async {
+    isLoading = true;
+    errorMessage = null;
+    notifyListeners();
+
+    try {
+      currentUser = await _repository.register(nom: nom, email: email, motDePasse: motDePasse);
+      status = AuthStatus.authenticated;
+      return true;
+    } catch (e) {
+      errorMessage = 'Impossible de créer le compte. Vérifiez vos informations.';
       return false;
     } finally {
       isLoading = false;
