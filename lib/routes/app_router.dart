@@ -10,6 +10,7 @@ import '../features/catalogue/screens/content_detail_screen.dart';
 import '../features/catalogue/screens/video_player_screen.dart';
 import '../features/catalogue/data/content_model.dart';
 import 'app_shell.dart';
+import '../features/catalogue/screens/search_screen.dart';
 
 class AppRouter {
   AppRouter._();
@@ -45,12 +46,11 @@ class AppRouter {
             ]),
             // Onglet Search -- proprietaire : Sacko (feature/catalogue-player)
             StatefulShellBranch(routes: [
-              GoRoute(
-                path: '/search',
-                builder: (context, state) => const PlaceholderScreen(
-                    title: 'Recherche', owner: 'Sacko - feature/catalogue-player'),
-              ),
-            ]),
+  GoRoute(
+    path: '/search',
+    builder: (context, state) => const SearchScreen(),
+  ),
+]),
             // Onglet Library -- proprietaire : Fadila (feature/subscription-profile)
             StatefulShellBranch(routes: [
               GoRoute(
