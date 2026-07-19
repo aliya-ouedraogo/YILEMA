@@ -100,7 +100,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 12,
-                      childAspectRatio: 0.6,
+                      childAspectRatio: 0.52,
                     ),
                     itemCount: results.length,
                     itemBuilder: (context, index) {

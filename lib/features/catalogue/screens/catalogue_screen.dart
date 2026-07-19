@@ -155,24 +155,34 @@ class _FeaturedBanner extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Row(
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () => context.push('/player/${content.id}', extra: content),
-                        icon: const Icon(Icons.play_arrow),
-                        label: const Text('Regarder'),
-                      ),
-                      const SizedBox(width: 12),
-                      OutlinedButton.icon(
-                        onPressed: () => context.push('/content/${content.id}', extra: content),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.textPrimary,
-                          side: const BorderSide(color: AppColors.textSecondary),
-                        ),
-                        icon: const Icon(Icons.info_outline),
-                        label: const Text('Infos'),
-                      ),
-                    ],
-                  ),
+  children: [
+    Expanded(
+      child: ElevatedButton.icon(
+        onPressed: () => context.push('/player/${content.id}', extra: content),
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size.fromHeight(48),
+          alignment: Alignment.center,
+        ),
+        icon: const Icon(Icons.play_arrow),
+        label: const Text('Regarder'),
+      ),
+    ),
+    const SizedBox(width: 12),
+    Expanded(
+      child: OutlinedButton.icon(
+        onPressed: () => context.push('/content/${content.id}', extra: content),
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size.fromHeight(48),
+          alignment: Alignment.center,
+          foregroundColor: AppColors.textPrimary,
+          side: const BorderSide(color: AppColors.textSecondary),
+        ),
+        icon: const Icon(Icons.info_outline),
+        label: const Text('Infos'),
+      ),
+    ),
+  ],
+),
                 ],
               ),
             ),

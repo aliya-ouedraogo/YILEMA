@@ -11,6 +11,7 @@ import '../features/catalogue/screens/video_player_screen.dart';
 import '../features/catalogue/data/content_model.dart';
 import 'app_shell.dart';
 import '../features/catalogue/screens/search_screen.dart';
+import '../features/catalogue/screens/fespaco_screen.dart';
 
 class AppRouter {
   AppRouter._();
@@ -60,13 +61,12 @@ class AppRouter {
               ),
             ]),
             // Onglet FESPACO -- proprietaire : Sacko (feature/catalogue-player)
-            StatefulShellBranch(routes: [
-              GoRoute(
-                path: '/fespaco',
-                builder: (context, state) => const PlaceholderScreen(
-                    title: 'Collection FESPACO', owner: 'Sacko - feature/catalogue-player'),
-              ),
-            ]),
+           StatefulShellBranch(routes: [
+  GoRoute(
+    path: '/fespaco',
+    builder: (context, state) => const FespacoScreen(),
+  ),
+]),
             // Onglet Profile -- proprietaire : Fadila (feature/subscription-profile)
             StatefulShellBranch(routes: [
               GoRoute(
