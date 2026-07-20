@@ -5,6 +5,9 @@ import '../features/auth/presentation/screens/login_screen.dart';
 import '../features/auth/presentation/screens/register_screen.dart';
 import '../features/auth/providers/auth_provider.dart';
 import '../features/onboarding/presentation/screens/onboarding_screen.dart';
+import '../features/profile/presentation/screens/history_screen.dart';
+import '../features/profile/presentation/screens/profile_screen.dart';
+import '../features/subscription/presentation/screens/subscription_screen.dart';
 import 'app_shell.dart';
 
 /// Point d'entrée unique des routes. Ajoutez une route par écran ici
@@ -32,60 +35,77 @@ class AppRouter {
         return null;
       },
       routes: [
-        GoRoute(path: '/onboarding', builder: (context, state) => const OnboardingScreen()),
-        GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
-        GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
+        GoRoute(
+            path: '/onboarding',
+            builder: (context, state) => const OnboardingScreen()),
+        GoRoute(
+            path: '/login', builder: (context, state) => const LoginScreen()),
+        GoRoute(
+            path: '/register',
+            builder: (context, state) => const RegisterScreen()),
 
         StatefulShellRoute.indexedStack(
-          builder: (context, state, navigationShell) => AppShell(navigationShell: navigationShell),
+          builder: (context, state, navigationShell) =>
+              AppShell(navigationShell: navigationShell),
           branches: [
             // Onglet Home -- propriétaire : Sacko (feature/catalogue-player)
             StatefulShellBranch(routes: [
               GoRoute(
                 path: '/home',
-                builder: (context, state) =>
-                    const PlaceholderScreen(title: 'Accueil / Catalogue', owner: 'Sacko - feature/catalogue-player'),
+                builder: (context, state) => const PlaceholderScreen(
+                    title: 'Accueil / Catalogue',
+                    owner: 'Sacko - feature/catalogue-player'),
               ),
             ]),
             // Onglet Search -- propriétaire : Sacko (feature/catalogue-player)
             StatefulShellBranch(routes: [
               GoRoute(
                 path: '/search',
-                builder: (context, state) =>
-                    const PlaceholderScreen(title: 'Recherche', owner: 'Sacko - feature/catalogue-player'),
+                builder: (context, state) => const PlaceholderScreen(
+                    title: 'Recherche',
+                    owner: 'Sacko - feature/catalogue-player'),
               ),
             ]),
             // Onglet Library -- propriétaire : Fadila (feature/subscription-profile)
             StatefulShellBranch(routes: [
               GoRoute(
                 path: '/library',
-                builder: (context, state) =>
-                    const PlaceholderScreen(title: 'Ma Bibliothèque', owner: 'Fadila - feature/subscription-profile'),
+                builder: (context, state) => const PlaceholderScreen(
+                    title: 'Ma Bibliothèque',
+                    owner: 'Fadila - feature/subscription-profile'),
               ),
             ]),
             // Onglet FESPACO -- propriétaire : Sacko (feature/catalogue-player)
             StatefulShellBranch(routes: [
               GoRoute(
                 path: '/fespaco',
-                builder: (context, state) =>
-                    const PlaceholderScreen(title: 'Collection FESPACO', owner: 'Sacko - feature/catalogue-player'),
+                builder: (context, state) => const PlaceholderScreen(
+                    title: 'Collection FESPACO',
+                    owner: 'Sacko - feature/catalogue-player'),
               ),
             ]),
             // Onglet Profile -- propriétaire : Fadila (feature/subscription-profile)
             StatefulShellBranch(routes: [
               GoRoute(
                 path: '/profile',
-                builder: (context, state) =>
-                    const PlaceholderScreen(title: 'Profil', owner: 'Fadila - feature/subscription-profile'),
+                builder: (context, state) => const ProfileScreen(),
               ),
             ]),
           ],
         ),
 
-        // TODO: routes hors coquille (sans barre de nav), à ajouter au fur et à mesure :
+        // Routes hors coquille (sans barre de nav) :
+        GoRoute(
+          path: '/subscription',
+          builder: (context, state) => const SubscriptionScreen(),
+        ),
+        GoRoute(
+          path: '/history',
+          builder: (context, state) => const HistoryScreen(),
+        ),
+        // TODO: routes restantes, à ajouter au fur et à mesure :
         // '/content/:id'     -> fiche détail d'un contenu (Sacko)
         // '/player/:id'      -> lecteur vidéo (Sacko)
-        // '/subscription'    -> écran d'abonnement / paiement (Fadila)
         // '/realisateur/...' -> espace réalisateur (Shahida)
       ],
     );
