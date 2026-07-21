@@ -68,11 +68,12 @@ class _HistoryScreenState extends State<HistoryScreen>
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: AppColors.accent),
           onPressed: () => context.pop(),
         ),
         title: const Text('MON HISTORIQUE',
-            style: TextStyle(fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: AppColors.accent)),
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
@@ -83,15 +84,20 @@ class _HistoryScreenState extends State<HistoryScreen>
       ),
       body: provider.isLoading
           ? const Center(child: CircularProgressIndicator())
-          : TabBarView(
-              controller: _tabController,
-              children: [
-                _OngletVisionnages(
-                  groupes: provider.visionnagesParMois,
-                  onEffacerTout: _confirmerSuppression,
+          : Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 480),
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _OngletVisionnages(
+                      groupes: provider.visionnagesParMois,
+                      onEffacerTout: _confirmerSuppression,
+                    ),
+                    _OngletTransactions(transactions: provider.transactions),
+                  ],
                 ),
-                _OngletTransactions(transactions: provider.transactions),
-              ],
+              ),
             ),
     );
   }

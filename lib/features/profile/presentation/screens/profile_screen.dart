@@ -33,7 +33,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('FASO CINÉ',
-            style: TextStyle(fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: AppColors.accent)),
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 16),
@@ -43,114 +44,120 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: provider.isLoading
           ? const Center(child: CircularProgressIndicator())
-          : SafeArea(
-              child: ListView(
-                padding: const EdgeInsets.all(16),
-                children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(3),
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.fromBorderSide(
-                              BorderSide(color: AppColors.success, width: 2),
+          : Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 480),
+                child: SafeArea(
+                  child: ListView(
+                    padding: const EdgeInsets.all(16),
+                    children: [
+                      Center(
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(3),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.fromBorderSide(
+                                  BorderSide(
+                                      color: AppColors.success, width: 2),
+                                ),
+                              ),
+                              child: const CircleAvatar(
+                                radius: 40,
+                                backgroundColor: AppColors.surfaceElevated,
+                                child: Icon(Icons.person,
+                                    size: 40, color: AppColors.textSecondary),
+                              ),
                             ),
-                          ),
-                          child: const CircleAvatar(
-                            radius: 40,
-                            backgroundColor: AppColors.surfaceElevated,
-                            child: Icon(Icons.person,
-                                size: 40, color: AppColors.textSecondary),
-                          ),
+                            const SizedBox(height: 12),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: AppColors.accent,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.add_circle,
+                                      size: 12, color: Colors.black),
+                                  SizedBox(width: 4),
+                                  Text('PREMIUM',
+                                      style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black)),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              utilisateur?.nom.toUpperCase() ?? '...',
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              utilisateur?.email ?? '',
+                              style: const TextStyle(
+                                  color: AppColors.textSecondary, fontSize: 13),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: AppColors.accent,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.add_circle,
-                                  size: 12, color: Colors.black),
-                              SizedBox(width: 4),
-                              Text('PREMIUM',
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black)),
-                            ],
-                          ),
+                      ),
+                      const SizedBox(height: 24),
+                      if (provider.enCoursDeLecture != null) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Continuer la lecture',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15)),
+                            TextButton(
+                              onPressed: () => context.go('/history'),
+                              child: const Text('Voir tout'),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          utilisateur?.nom.toUpperCase() ?? '...',
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          utilisateur?.email ?? '',
-                          style: const TextStyle(
-                              color: AppColors.textSecondary, fontSize: 13),
-                        ),
+                        _CarteEnCours(item: provider.enCoursDeLecture!),
+                        const SizedBox(height: 16),
                       ],
-                    ),
+                      _LigneMenu(
+                        icone: Icons.bookmark_border,
+                        titre: 'Ma Liste',
+                        onTap: () => context.go('/library'),
+                      ),
+                      _LigneMenu(
+                        icone: Icons.history,
+                        titre: 'Historique',
+                        onTap: () => context.go('/history'),
+                      ),
+                      _LigneMenu(
+                        icone: Icons.workspace_premium_outlined,
+                        titre: 'Abonnement',
+                        sousTitre: 'PLAN PREMIUM ACTIF',
+                        sousTitreColor: AppColors.accent,
+                        onTap: () => context.go('/subscription'),
+                      ),
+                      _LigneMenu(
+                        icone: Icons.settings_outlined,
+                        titre: 'Paramètres',
+                        onTap: () {},
+                      ),
+                      const SizedBox(height: 16),
+                      _LigneMenu(
+                        icone: Icons.logout,
+                        titre: 'Déconnexion',
+                        couleur: AppColors.danger,
+                        onTap: () async {
+                          await context.read<AuthProvider>().logout();
+                          if (context.mounted) context.go('/login');
+                        },
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 24),
-                  if (provider.enCoursDeLecture != null) ...[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Continuer la lecture',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15)),
-                        TextButton(
-                          onPressed: () => context.go('/history'),
-                          child: const Text('Voir tout'),
-                        ),
-                      ],
-                    ),
-                    _CarteEnCours(item: provider.enCoursDeLecture!),
-                    const SizedBox(height: 16),
-                  ],
-                  _LigneMenu(
-                    icone: Icons.bookmark_border,
-                    titre: 'Ma Liste',
-                    onTap: () => context.go('/library'),
-                  ),
-                  _LigneMenu(
-                    icone: Icons.history,
-                    titre: 'Historique',
-                    onTap: () => context.go('/history'),
-                  ),
-                  _LigneMenu(
-                    icone: Icons.workspace_premium_outlined,
-                    titre: 'Abonnement',
-                    sousTitre: 'PLAN PREMIUM ACTIF',
-                    sousTitreColor: AppColors.accent,
-                    onTap: () => context.go('/subscription'),
-                  ),
-                  _LigneMenu(
-                    icone: Icons.settings_outlined,
-                    titre: 'Paramètres',
-                    onTap: () {},
-                  ),
-                  const SizedBox(height: 16),
-                  _LigneMenu(
-                    icone: Icons.logout,
-                    titre: 'Déconnexion',
-                    couleur: AppColors.danger,
-                    onTap: () async {
-                      await context.read<AuthProvider>().logout();
-                      if (context.mounted) context.go('/login');
-                    },
-                  ),
-                ],
+                ),
               ),
             ),
     );
