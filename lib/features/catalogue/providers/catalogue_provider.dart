@@ -7,7 +7,7 @@ class CatalogueProvider extends ChangeNotifier {
   final _repository = CatalogueRepository();
 
   // ⚠️ Mettre a false quand l'API sera prete
-  static const bool _useMockData = true;
+  static const bool _useMockData = false;
 
   final List<ContentModel> _mockContents = [
     ContentModel(
