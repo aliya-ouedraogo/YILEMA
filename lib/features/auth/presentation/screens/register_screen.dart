@@ -157,17 +157,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              Center(
+              const Center(
                 child: Text.rich(
                   TextSpan(
-                    style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
                     children: [
-                      const TextSpan(text: 'En continuant, vous acceptez nos '),
+                      TextSpan(text: 'En continuant, vous acceptez nos '),
                       TextSpan(
                           text: "Conditions d'Utilisation",
                           style: TextStyle(
                               color: AppColors.textPrimary, decoration: TextDecoration.underline)),
-                      const TextSpan(text: ' et notre '),
+                      TextSpan(text: ' et notre '),
                       TextSpan(
                           text: 'Politique de Confidentialité.',
                           style: TextStyle(

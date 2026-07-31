@@ -26,7 +26,7 @@ class AppLogo extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: fontSize,
                   letterSpacing: 0.5)),
-        ],
+        ], 
       ),
     );
   }
