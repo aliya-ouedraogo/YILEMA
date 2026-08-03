@@ -8,6 +8,8 @@ class User(AbstractUser):
         ('actif', 'Actif'),
     ]
 
+    email = models.EmailField(unique=True)
+    nom = models.CharField(max_length=150, blank=True)
     telephone = models.CharField(max_length=20, blank=True, null=True)
     statut_abonnement = models.CharField(
         max_length=10,
@@ -17,4 +19,4 @@ class User(AbstractUser):
     date_creation = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.username
+        return self.email
