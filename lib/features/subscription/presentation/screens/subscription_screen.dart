@@ -41,9 +41,20 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           content: TextField(
             controller: controllerTelephone,
             keyboardType: TextInputType.phone,
-            decoration: const InputDecoration(
+            autofocus: true,
+            style: const TextStyle(color: AppColors.textPrimary),
+            decoration: InputDecoration(
               labelText: 'Numéro Mobile Money',
               hintText: 'Ex: 70 00 00 00',
+              hintStyle: const TextStyle(color: AppColors.textSecondary),
+              filled: true,
+              fillColor: AppColors.surfaceElevated,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             ),
           ),
           actions: [

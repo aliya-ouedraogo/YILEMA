@@ -27,11 +27,11 @@ class SubscriptionRepository {
       ApiConstants.payments,
       data: {
         'plan_id': planId,
-        'methode_paiement': methode.valeurApi,
-        'numero_telephone': numeroTelephone,
+        'provider': methode.valeurApi,
+        'phone_number': numeroTelephone,
       },
     );
 
-    return response.data['statut'] == 'succes';
+    return response.statusCode == 201;
   }
 }
