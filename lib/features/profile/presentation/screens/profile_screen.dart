@@ -32,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FASO CINÉ',
+        title: const Text('PROFIL',
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: AppColors.accent)),
         actions: const [

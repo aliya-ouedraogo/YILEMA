@@ -98,9 +98,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
-        title: const Text('FASO CINÉ',
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: AppColors.accent)),
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 16),
@@ -316,10 +313,25 @@ class _ComparaisonServices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      (Icons.high_quality, 'Qualité Vidéo', 'SD à Ultra HD 4K'),
-      (Icons.devices, 'Appareils', '1 à 5 connexions'),
-      (Icons.download_outlined, 'Téléchargement', 'Premium & Famille'),
-      (Icons.star_border, 'Avant-Premières', 'Membres VIP Gold'),
+      (
+        Icons.high_quality,
+        'Qualité Vidéo',
+        'SD à Ultra HD 4K',
+        AppColors.accent
+      ),
+      (Icons.devices, 'Appareils', '1 à 5 connexions', const Color(0xFF4FC3F7)),
+      (
+        Icons.download_outlined,
+        'Téléchargement',
+        'Premium & Famille',
+        AppColors.success
+      ),
+      (
+        Icons.star_border,
+        'Avant-Premières',
+        'Membres VIP Gold',
+        const Color(0xFFBA68C8)
+      ),
     ];
 
     return GridView.count(
@@ -339,7 +351,14 @@ class _ComparaisonServices extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(item.$1, size: 20, color: AppColors.textPrimary),
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: item.$4.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Icon(item.$1, size: 18, color: item.$4),
+                ),
                 const SizedBox(height: 8),
                 Text(item.$2,
                     style: const TextStyle(
