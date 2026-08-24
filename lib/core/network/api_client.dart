@@ -13,7 +13,9 @@ class ApiClient {
         baseUrl: ApiConstants.baseUrl,
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+        },
       ),
     );
     _dio.interceptors.add(_authInterceptor());
@@ -46,7 +48,8 @@ class ApiClient {
     );
   }
 
-  Future<void> saveTokens({required String access, required String refresh}) async {
+  Future<void> saveTokens(
+      {required String access, required String refresh}) async {
     await _secureStorage.write(key: 'access_token', value: access);
     await _secureStorage.write(key: 'refresh_token', value: refresh);
   }

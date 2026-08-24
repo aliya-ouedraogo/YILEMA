@@ -31,12 +31,18 @@ class AppRouter {
         return null;
       },
       routes: [
-        GoRoute(path: '/onboarding', builder: (context, state) => const OnboardingScreen()),
-        GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
-        GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
+        GoRoute(
+            path: '/onboarding',
+            builder: (context, state) => const OnboardingScreen()),
+        GoRoute(
+            path: '/login', builder: (context, state) => const LoginScreen()),
+        GoRoute(
+            path: '/register',
+            builder: (context, state) => const RegisterScreen()),
 
         StatefulShellRoute.indexedStack(
-          builder: (context, state, navigationShell) => AppShell(navigationShell: navigationShell),
+          builder: (context, state, navigationShell) =>
+              AppShell(navigationShell: navigationShell),
           branches: [
             // Onglet Home -- proprietaire : Sacko (feature/catalogue-player)
             StatefulShellBranch(routes: [

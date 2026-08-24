@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/providers/auth_provider.dart';
 import 'features/catalogue/providers/catalogue_provider.dart';
+import 'features/profile/providers/history_provider.dart';
+import 'features/profile/providers/profile_provider.dart';
+import 'features/subscription/providers/subscription_provider.dart';
 import 'routes/app_router.dart';
 
 void main() {
@@ -29,10 +32,13 @@ class _YilemaAppState extends State<YilemaApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // Ajoutez ici les providers de subscription, profile, reviews
-        // au fur et à mesure qu'ils seront développés.
+        // Providers de subscription, profile, reviews : ajoutés au fur et
+        // à mesure. Ceux ci-dessous sont de Fadila (feature/subscription-profile).
         ChangeNotifierProvider.value(value: _authProvider),
         ChangeNotifierProvider.value(value: _catalogueProvider),
+        ChangeNotifierProvider(create: (_) => SubscriptionProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => HistoryProvider()),
       ],
       child: MaterialApp.router(
         title: 'Yilema',

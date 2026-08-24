@@ -10,7 +10,7 @@ class ApiConstants {
   static const String login = '/auth/login/';
   static const String register = '/auth/register/';
   static const String refreshToken = '/auth/refresh/';
-  static const String profile = '/auth/profile/';
+  static const String profile = '/auth/me/';
 
   // Catalogue
   static const String contents = '/contenus/';
@@ -20,8 +20,8 @@ class ApiConstants {
   static String episodes(int serieId) => '/series/$serieId/episodes/';
 
   // Abonnement & Paiement
-  static const String subscriptions = '/abonnements/';
-  static const String payments = '/paiements/';
+  static const String subscriptions = '/subscriptions/plans/';
+  static const String payments = '/subscriptions/pay/';
 
   // Avis & Historique
   static const String reviews = '/avis/';
