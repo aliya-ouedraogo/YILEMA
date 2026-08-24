@@ -1,13 +1,11 @@
-/// Modèle correspondant à la classe abstraite `Contenu` du diagramme UML.
-/// `type` distingue film / serie / documentaire (héritage côté backend).
 class ContentModel {
   final int id;
   final String titre;
   final String synopsis;
-  final String type; // 'film' | 'serie' | 'documentaire'
+  final String type;
   final int anneeSortie;
   final int duree;
-  final String urlVideo;
+  final String? urlVideo;      // ← ajout du ?
   final String? affiche;
 
   ContentModel({
@@ -17,7 +15,7 @@ class ContentModel {
     required this.type,
     required this.anneeSortie,
     required this.duree,
-    required this.urlVideo,
+    this.urlVideo,              // ← plus "required"
     this.affiche,
   });
 
@@ -29,7 +27,7 @@ class ContentModel {
       type: json['type'],
       anneeSortie: json['annee_sortie'],
       duree: json['duree'],
-      urlVideo: json['url_video'],
+      urlVideo: json['url_video'],   // ← inchangé, accepte maintenant null
       affiche: json['affiche'],
     );
   }

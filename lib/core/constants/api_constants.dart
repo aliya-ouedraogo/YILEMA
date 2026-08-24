@@ -4,8 +4,7 @@ class ApiConstants {
   ApiConstants._();
 
   // TODO: remplacer par l'URL de déploiement une fois le backend en ligne
-  static const String baseUrl =
-      'http://localhost:8000/api'; // 10.0.2.2 = localhost depuis l'émulateur Android
+  static const String baseUrl = 'http://localhost:8000/api'; // 10.0.2.2 = localhost depuis l'émulateur Android
 
   // Authentification
   static const String login = '/auth/login/';
